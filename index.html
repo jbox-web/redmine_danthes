@@ -1,0 +1,216 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Redmine danthes by jbox-web</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Redmine danthes</h1>
+        <p>A Redmine plugin which makes sending asynchronous notifications easy ;)</p>
+
+        <p class="view"><a href="https://github.com/jbox-web/redmine_danthes">View the Project on GitHub <small>jbox-web/redmine_danthes</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/jbox-web/redmine_danthes/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/jbox-web/redmine_danthes/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/jbox-web/redmine_danthes">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a id="-redmine-danthès-plugin" class="anchor" href="#-redmine-danth%C3%A8s-plugin" aria-hidden="true"><span class="octicon octicon-link"></span></a>
+<img src="https://raw.github.com/jbox-web/redmine_danthes/gh-pages/images/logo.png" alt="logo"> Redmine d'Anthès Plugin</h2>
+
+<h3>
+<a id="a-redmine-plugin-which-makes-sending-asynchronous-notifications-easy-" class="anchor" href="#a-redmine-plugin-which-makes-sending-asynchronous-notifications-easy-" aria-hidden="true"><span class="octicon octicon-link"></span></a>A Redmine plugin which makes sending asynchronous notifications easy ;)</h3>
+
+<p>This plugin allows straightforward integration of <a href="https://github.com/dotpromo/danthes">d'Anthès</a> within Redmine.</p>
+
+<h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<ul>
+<li>Ruby 2.0.x</li>
+<li>a working <a href="http://www.redmine.org/">Redmine</a> installation</li>
+<li>a working Redis server</li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<pre><code>## Before install the plugin, stop Redmine!
+
+# Clone plugin
+root# su - redmine
+redmine$ cd REDMINE_ROOT/plugins
+redmine$ git clone https://github.com/jbox-web/redmine_danthes.git
+
+# Copy Danthes config file to Redmine config dir
+redmine$ cd redmine_danthes/
+redmine$ cp config/danthes*.yml ../../config/
+
+# Copy ```danthes.ru``` Rack script to Redmine root dir
+redmine$ cp danthes.ru ../../
+
+# Install gems
+redmine$ cd REDMINE_ROOT
+redmine$ bundle install
+
+## After install the plugin, start Redmine!
+</code></pre>
+
+<h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p>You <strong>must</strong> configure d'Anthès by editing <code>config/danthes.yml</code> file.</p>
+
+<p>You will have to set a secret to secure your connection with Faye and the Redmine url (for instance <a href="http://redmine.example.net">http://redmine.example.net</a>).</p>
+
+<p>You <strong>must</strong> also configure your webserver to redirect Faye requests :</p>
+
+<p>Nginx config :</p>
+
+<p>Add this in <code>server</code> section :</p>
+
+<pre><code>location /faye {
+  access_log   /data/logs/nginx/faye.access.log;
+  error_log    /data/logs/nginx/faye.error.log;
+
+  proxy_pass http://127.0.0.1:9292;
+
+  proxy_http_version 1.1;
+
+  proxy_set_header Upgrade $http_upgrade;
+  proxy_set_header Connection $connection_upgrade;
+
+  proxy_set_header X-Real-IP  $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header X-Forwarded-Proto https;
+  proxy_set_header Host $http_host;
+
+  gzip off;
+  expires off;
+
+  chunked_transfer_encoding off;
+  proxy_buffering           off;
+  proxy_cache               off;
+  proxy_redirect            off;
+  proxy_send_timeout        850000;
+  proxy_read_timeout        850000;
+  proxy_connect_timeout     850000;
+}
+</code></pre>
+
+<p>Add this outside of <code>server</code> section :</p>
+
+<pre><code>map $http_upgrade $connection_upgrade {
+  default upgrade;
+  ''      close;
+}
+</code></pre>
+
+<h2>
+<a id="start-danthèsfaye" class="anchor" href="#start-danth%C3%A8sfaye" aria-hidden="true"><span class="octicon octicon-link"></span></a>Start d'Anthès/Faye!</h2>
+
+<pre><code>root# su - redmine
+redmine$ cd REDMINE_ROOT
+redmine$ rackup danthes.ru -s thin -E production
+</code></pre>
+
+<p>You're done!</p>
+
+<p>Now you may need to add your own notifications channels and events, see below!</p>
+
+<h2>
+<a id="plugin-developpers" class="anchor" href="#plugin-developpers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Plugin developpers</h2>
+
+<p>If you want to integrate Faye async notifications in your plugin you need to register your own channels and events in your <code>init.rb</code> file : each channel can have many events. It may also have an optional <code>target</code> parameter which can be a string or a Proc.</p>
+
+<pre><code>## it must be OUTSIDE of the Redmine::Plugin.register block
+
+AsyncNotifications.register_channel :channel_test do
+  target Proc.new { User.current.login }
+  event  :event1
+  event  :event2
+  event  :event3
+end
+
+AsyncNotifications.register_channel :broadcast do
+  target 'broadcast'
+  event  :event1
+  event  :event2
+  event  :event3
+end
+</code></pre>
+
+<p>The rest is handled by the plugin ;)</p>
+
+<p>To check that it's working go in Redmine and load any page. Then edit with Firebug. At the bottom you should have something like that :</p>
+
+<pre><code>&lt;div data-url="/my/notifications" id="notifications" style="display: none;"&gt;
+  &lt;script type="text/javascript"&gt;
+    if (typeof Danthes != 'undefined') { Danthes.sign({"server":"http://redmine.example.net/faye","timestamp":1427061870776,"channel":"/channel_test/admin","signature":"8416c90289dbdbd35130da4018d376b5469c1793"}) }
+  &lt;/script&gt;
+&lt;/div&gt;
+&lt;script&gt;
+  $(document).ready(function() { setAsyncNotifications(); });
+&lt;/script&gt;
+</code></pre>
+
+<p>You should also see connections to Faye and errors if any.</p>
+
+<p>Note that if your browser or your connection don't support WebSockets it will fallback to long-polling mode automatically.</p>
+
+<h2>
+<a id="copyrights--license" class="anchor" href="#copyrights--license" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copyrights &amp; License</h2>
+
+<p>Redmine d'Anthes is completely free and open source and released under the <a href="https://github.com/jbox-web/redmine_pusher_notifications/blob/devel/LICENSE">MIT License</a>.</p>
+
+<p>Copyright (c) 2015 Nicolas Rodriguez (<a href="mailto:nrodriguez@jbox-web.com">nrodriguez@jbox-web.com</a>), JBox Web (<a href="http://www.jbox-web.com">http://www.jbox-web.com</a>) <a href="https://coderwall.com/n-rodriguez"><img src="https://api.coderwall.com/n-rodriguez/endorsecount.png" alt="endorse"></a></p>
+
+<h2>
+<a id="contribute" class="anchor" href="#contribute" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contribute</h2>
+
+<p>You can contribute to this plugin in many ways such as :</p>
+
+<ul>
+<li>Helping with documentation</li>
+<li>Contributing code (features or bugfixes)</li>
+<li>Reporting a bug</li>
+<li>Submitting translations</li>
+</ul>
+
+<p>You can also donate :)</p>
+
+<p><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=FBT7E7DAVVEEU"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" alt="Donate"></a></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/jbox-web">jbox-web</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-36504891-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
