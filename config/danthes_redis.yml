@@ -1,0 +1,12 @@
+development:
+  host: localhost
+  port: 6379
+  namespace: '/danthes'
+test:
+  host: localhost
+  port: 6379
+  namespace: '/danthes'
+production:
+  host: localhost
+  port: 6379
+  namespace: '/danthes'

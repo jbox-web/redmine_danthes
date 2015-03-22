@@ -1,0 +1,7 @@
+- if User.current.logged?
+  = javascript_include_tag :danthes,     plugin: 'redmine_danthes'
+  = javascript_include_tag :application, plugin: 'redmine_danthes'
+
+  #notifications{ style: 'display: none;', data: { url: my_notifications_path } }= render_user_subscribed_channels
+  :javascript
+    $(document).ready(function() { setAsyncNotifications(); });

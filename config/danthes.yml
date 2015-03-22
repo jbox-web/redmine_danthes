@@ -1,0 +1,18 @@
+development:
+  adapter: thin
+  server: 'PUTS YOUR REDMINE URL HERE (example : http://redmine.example.net)'
+  mount: '/faye'
+  secret_token: 'PUTS YOUR SECRET HERE'
+  signature_expiration: 3600 # one hour
+test:
+  adapter: thin
+  server: 'PUTS YOUR REDMINE URL HERE (example : http://redmine.example.net)'
+  mount: '/faye'
+  secret_token: 'PUTS YOUR SECRET HERE'
+  signature_expiration: 3600 # one hour
+production:
+  adapter: thin
+  server: 'PUTS YOUR REDMINE URL HERE (example : http://redmine.example.net)'
+  mount: '/faye'
+  secret_token: 'PUTS YOUR SECRET HERE'
+  signature_expiration: 3600 # one hour
