@@ -16,7 +16,7 @@ Read the documentation and more in the [Wiki](https://github.com/jbox-web/redmin
 
 ## Copyrights & License
 
-Redmine d'Anthes is completely free and open source and released under the [MIT License](https://github.com/jbox-web/redmine_pusher_notifications/blob/devel/LICENSE).
+Redmine d'Anthes is completely free and open source and released under the [MIT License](https://github.com/jbox-web/redmine_danthes/blob/devel/LICENSE).
 
 Copyright (c) 2015 Nicolas Rodriguez (nrodriguez@jbox-web.com), JBox Web (http://www.jbox-web.com) [![endorse](https://api.coderwall.com/n-rodriguez/endorsecount.png)](https://coderwall.com/n-rodriguez)
 
