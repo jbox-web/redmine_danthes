@@ -8,7 +8,21 @@
 
 ### A Redmine plugin which makes sending asynchronous notifications easy ;)
 
-This plugin allows straightforward integration of [d'Anthès](https://github.com/dotpromo/danthes) within Redmine.
+This plugin allows straightforward integration of [d'Anthès](https://github.com/dotpromo/danthes) within to display nice notifications in Growl style.
+
+It relies on :
+
+* [d'Anthès](https://github.com/dotpromo/danthes) which provide easy [Faye backend](http://faye.jcoglan.com/) integration in any Rails application.
+* [async_notifications](https://github.com/jbox-web/) gem so plugins developpers can access to the DSL provided to register their own channels and events (see the doc in the [Wiki](https://github.com/jbox-web/redmine_danthes/wiki)).
+* [Redmine Bootstrap Kit](https://github.com/jbox-web/redmine_bootstrap_kit) which provides [Bootstrap Notify](http://bootstrap-growl.remabledesigns.com/).
+
+## Why?
+
+Before switching to d'Anthès and write this plugin, I used [Redmine Pusher Notifications](https://github.com/jbox-web/redmine_pusher_notifications) which does exactly the same job...
+
+With the drawback that it depends on [Pusher](https://pusher.com/) service (a really nice messaging solution by the way) to work.
+
+With Redmine d'Anthès, this external dependency is removed so you can use async notifications with no limits ! :)
 
 ## Installation
 
