@@ -33,18 +33,24 @@ displayGrowlMessage = function(data) {
   };
   growl_options = {
     type: data.type,
-    delay: 3000,
+    delay: data.delay,
     template: growlTemplate(),
     animate: {
       enter: 'animated fadeInRight',
       exit: 'animated fadeOutRight'
     }
   };
-  return $.growl(growl_data, growl_options);
+  return $.notify(growl_data, growl_options);
 };
 
 growlTemplate = function() {
-  return '<div data-growl="container" class="[ col-xs-11 col-sm-3 ] alert" role="alert"><button type="button" class="close" data-growl="dismiss"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><span data-growl="icon"></span><span data-growl="title"></span><span data-growl="message"></span><a href="#" data-growl="url"></a></div>';
+  return '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert" style="padding-bottom: 0px;">' +
+      '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>' +
+      '<span data-notify="icon"></span> ' +
+      '<span data-notify="title">{1}</span> ' +
+      '<span data-notify="message">{2}</span>' +
+      '<a href="{3}" target="{4}" data-notify="url"></a>' +
+    '</div>';
 };
 
 triggerViewRefresh = function(data) {

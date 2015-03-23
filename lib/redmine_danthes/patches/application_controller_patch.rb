@@ -9,6 +9,7 @@ module RedmineDanthes
           unloadable
 
           helper :danthes
+          helper :bootstrap
         end
       end
 

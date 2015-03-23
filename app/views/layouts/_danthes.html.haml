@@ -1,4 +1,9 @@
 - if User.current.logged?
+  = bootstrap_load_base
+  = bootstrap_load_module(:alerts)
+  = bootstrap_load_module(:notify)
+  = bootstrap_load_module(:font_awesome)
+
   = javascript_include_tag :danthes,     plugin: 'redmine_danthes'
   = javascript_include_tag :application, plugin: 'redmine_danthes'
 
