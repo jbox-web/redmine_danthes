@@ -1,4 +1,4 @@
-## ![logo](https://raw.github.com/jbox-web/redmine_danthes/gh-pages/images/logo.png) Redmine d'Anthès Plugin
+## ![logo](https://raw.github.com/jbox-web/redmine_danthes/gh-pages/images/redmine_logo.png) Redmine d'Anthès Plugin
 
 [![Code Climate](https://codeclimate.com/github/jbox-web/redmine_danthes.png)](https://codeclimate.com/github/jbox-web/redmine_danthes)
 [![Build Status](https://travis-ci.org/jbox-web/redmine_danthes.svg?branch=devel)](https://travis-ci.org/jbox-web/redmine_danthes)
