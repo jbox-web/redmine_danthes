@@ -18,9 +18,7 @@ It relies on :
 
 ## Why?
 
-Before switching to d'Anthès and write this plugin, I used [Redmine Pusher Notifications](https://github.com/jbox-web/redmine_pusher_notifications) which does exactly the same job...
-
-With the drawback that it depends on [Pusher](https://pusher.com/) service (a really nice messaging solution by the way) to work.
+Before switching to d'Anthès and write this plugin, I used [Redmine Pusher Notifications](https://github.com/jbox-web/redmine_pusher_notifications) which does exactly the same job... with the drawback that it depends on [Pusher](https://pusher.com/) service to work (a really nice messaging solution by the way).
 
 With Redmine d'Anthès, this external dependency is removed so you can use async notifications with no limits ! :)
 
