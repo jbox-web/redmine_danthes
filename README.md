@@ -8,7 +8,7 @@
 
 ### A Redmine plugin which makes sending asynchronous notifications easy ;)
 
-This plugin allows straightforward integration of [d'Anthès](https://github.com/dotpromo/danthes) within to display nice notifications in Growl style.
+This plugin allows straightforward integration of [d'Anthès](https://github.com/dotpromo/danthes) within Redmine to display nice notifications in Growl style.
 
 It relies on :
 
