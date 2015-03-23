@@ -18,6 +18,17 @@ module RedmineDanthes
           AsyncNotifications.channels.map(&:name)
         end
 
+
+        def receive_async_notifications?
+          self.custom_field_values.each do |custom|
+            if custom.custom_field.name == 'Receive Async Notifications'
+              return custom.value
+            end
+          end
+          return true if admin?
+          return false
+        end
+
       end
 
 
