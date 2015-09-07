@@ -13,7 +13,7 @@ This plugin allows straightforward integration of [d'Anthès](https://github.com
 It relies on :
 
 * [d'Anthès](https://github.com/dotpromo/danthes) which provide easy [Faye backend](http://faye.jcoglan.com/) integration in any Rails application.
-* [async_notifications](https://github.com/jbox-web/) gem so plugins developpers can access to the DSL provided to register their own channels and events (see the doc in the [Wiki](https://github.com/jbox-web/redmine_danthes/wiki)).
+* [async_notifications](https://github.com/jbox-web/async_notifications) gem so plugins developpers can access to the DSL provided to register their own channels and events (see the doc in the [Wiki](https://github.com/jbox-web/redmine_danthes/wiki)).
 * [Redmine Bootstrap Kit](https://github.com/jbox-web/redmine_bootstrap_kit) which provides [Bootstrap Notify](http://bootstrap-growl.remabledesigns.com/).
 
 ## Why?
