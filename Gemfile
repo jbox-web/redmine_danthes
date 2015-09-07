@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'async_notifications', '~> 0.1', git: 'https://github.com/n-rodriguez/async_notifications.git', branch: 'devel'
+gem 'async_notifications', '~> 1.0.0', git: 'https://github.com/jbox-web/async_notifications.git', tag: '1.0.0'
 
 # HAML views
 gem 'haml-rails'
