@@ -121,7 +121,7 @@ map $http_upgrade $connection_upgrade {
 root# su - redmine
 redmine$ cd REDMINE_ROOT
 redmine$ rackup danthes.ru -s thin -E production
-```nginx
+```
 
 You're done!
 
