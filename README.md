@@ -155,7 +155,7 @@ The rest is handled by the plugin ;)
 
 To check that it's working go in Redmine and load any page. Then edit with Firebug. At the bottom you should have something like that :
 
-```ruby
+```html+erb
 <div data-url="/my/notifications" id="notifications" style="display: none;">
   <script type="text/javascript">
     if (typeof Danthes != 'undefined') { Danthes.sign({"server":"http://redmine.example.net/faye","timestamp":1427061870776,"channel":"/channel_test/admin","signature":"8416c90289dbdbd35130da4018d376b5469c1793"}) }
