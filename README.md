@@ -1,5 +1,7 @@
 ## ![logo](https://raw.github.com/jbox-web/redmine_danthes/gh-pages/images/redmine_logo.png) Redmine d'Anthès Plugin
 
+[![GitHub license](https://img.shields.io/github/license/jbox-web/redmine_danthes.svg)](https://github.com/jbox-web/redmine_danthes/blob/devel/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/jbox-web/redmine_danthes.svg)](https://github.com/jbox-web/redmine_danthes/releases/latest)
 [![Code Climate](https://codeclimate.com/github/jbox-web/redmine_danthes.png)](https://codeclimate.com/github/jbox-web/redmine_danthes)
 [![Build Status](https://travis-ci.org/jbox-web/redmine_danthes.svg?branch=devel)](https://travis-ci.org/jbox-web/redmine_danthes)
 [![Dependency Status](https://gemnasium.com/jbox-web/redmine_danthes.svg)](https://gemnasium.com/jbox-web/redmine_danthes)
