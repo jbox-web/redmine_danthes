@@ -8,6 +8,9 @@ module RedmineDanthes
         base.send(:include, InstanceMethods)
         base.class_eval do
           unloadable
+
+          helper :bootstrap
+          helper :danthes
         end
       end
 
