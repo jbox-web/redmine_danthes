@@ -4,8 +4,6 @@
 [![GitHub release](https://img.shields.io/github/release/jbox-web/redmine_danthes.svg)](https://github.com/jbox-web/redmine_danthes/releases/latest)
 [![Code Climate](https://codeclimate.com/github/jbox-web/redmine_danthes.png)](https://codeclimate.com/github/jbox-web/redmine_danthes)
 [![Build Status](https://travis-ci.org/jbox-web/redmine_danthes.svg?branch=devel)](https://travis-ci.org/jbox-web/redmine_danthes)
-[![Dependency Status](https://gemnasium.com/jbox-web/redmine_danthes.svg)](https://gemnasium.com/jbox-web/redmine_danthes)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jbox-web/redmine_danthes?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ### A Redmine plugin which makes sending asynchronous notifications easy ;)
 
